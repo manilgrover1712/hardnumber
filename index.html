@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hardnumber - Daily Number Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landing-page" class="landing-page">
+        <div class="landing-content">
+            <h1 class="landing-title">Hardnumber 🧠</h1>
+            <p class="landing-subtitle">Find the hidden 4-digit number in 9 tries.</p>
+            <p class="landing-description">New hidden number every day.</p>
+            <button id="playBtn" class="play-btn">Play Game</button>
+        </div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen" style="display: none;">
+        <div class="loading-content">
+            <h2>Game loading... <strong id="countdown">5</strong></h2>
+        </div>
+    </div>
+
+    <!-- Game Container -->
+    <div class="container" id="game-container" style="display: none;">
+        <nav class="nav-header">
+            <button id="helpBtn" class="nav-button">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </button>
+            <h1 class="title">Hardnumber</h1>
+            <button id="statsBtn" class="nav-button">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+            </button>
+        </nav>
+
+        <div id="game-board"></div>
+
+        <div class="game-footer">
+            <p>Made by <a href="mailto:manilgrover1712@gmail.com">Manil Grover</a> • <a href="https://www.linkedin.com/in/manilgrover/" target="_blank">LinkedIn</a></p>
+        </div>
+
+        <div class="keyboard">
+            <div class="number-row">
+                <button class="key" data-key="1">1</button>
+                <button class="key" data-key="2">2</button>
+                <button class="key" data-key="3">3</button>
+                <button class="key" data-key="4">4</button>
+                <button class="key" data-key="5">5</button>
+            </div>
+            <div class="number-row">
+                <button class="key" data-key="6">6</button>
+                <button class="key" data-key="7">7</button>
+                <button class="key" data-key="8">8</button>
+                <button class="key" data-key="9">9</button>
+                <button class="key" data-key="0">0</button>
+            </div>
+            <div class="action-row">
+                <button class="key action-key" id="enterBtn">ENTER</button>
+                <button class="key action-key" id="backspaceBtn">⌫</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>How to Play</h2>
+            <p>Find the hidden 4-digit NUMBER in nine tries.</p>
+            <p>Use the green and yellow indicators after each guess to see how close you are to the solution.</p>
+            
+            <div class="examples">
+                <h3>Examples</h3>
+                <div class="example">
+                    <div class="example-guess">
+                        <span class="digit">1</span>
+                        <span class="digit">2</span>
+                        <span class="digit">3</span>
+                        <span class="digit">4</span>
+                    </div>
+                    <div class="example-result">
+                        <span class="green">2</span>
+                        <span class="yellow">1</span>
+                    </div>
+                    <p>2 digits are in the correct spot, 1 more digit is present but in the wrong spot.</p>
+                </div>
+                
+                <div class="example">
+                    <div class="example-guess">
+                        <span class="digit">5</span>
+                        <span class="digit">6</span>
+                        <span class="digit">7</span>
+                        <span class="digit">8</span>
+                    </div>
+                    <div class="example-result">
+                        <span class="green">1</span>
+                        <span class="yellow">0</span>
+                    </div>
+                    <p>1 digit is in the correct spot. None of the rest are present.</p>
+                </div>
+                
+                <div class="example">
+                    <div class="example-guess">
+                        <span class="digit">9</span>
+                        <span class="digit">0</span>
+                        <span class="digit">1</span>
+                        <span class="digit">2</span>
+                    </div>
+                    <div class="example-result">
+                        <span class="green">0</span>
+                        <span class="yellow">0</span>
+                    </div>
+                    <p>None of the digits are present in the number.</p>
+                </div>
+            </div>
+            
+            <p><strong>A new Hardnumber will be available each day.</strong></p>
+            <p class="note">Note: All digits in the number are unique.</p>
+            
+            <div class="contact-footer">
+                <p>Made by Manil Grover</p>
+                <div class="contact-links">
+                    <a href="mailto:manilgrover1712@gmail.com" target="_blank">📧 Email</a>
+                    <a href="https://www.linkedin.com/in/manilgrover/" target="_blank">💼 LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Modal -->
+    <div id="statsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Statistics</h2>
+            <div class="stats-container">
+                <div class="stat">
+                    <div class="stat-value" id="gamesPlayed">0</div>
+                    <div class="stat-label">Played</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="winPercentage">0</div>
+                    <div class="stat-label">Win %</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="currentStreak">0</div>
+                    <div class="stat-label">Current Streak</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="maxStreak">0</div>
+                    <div class="stat-label">Max Streak</div>
+                </div>
+            </div>
+            <div id="shareSection" style="display: none;">
+                <button id="shareBtn" class="share-btn">Share Results</button>
+                <div class="next-number-timer">
+                    <p>Next Hardnumber in</p>
+                    <h3 id="nextNumberTimer">--:--:--</h3>
+                </div>
+            </div>
+            
+            <div class="contact-footer">
+                <p>Made by Manil Grover</p>
+                <div class="contact-links">
+                    <a href="mailto:manilgrover1712@gmail.com" target="_blank">📧 Email</a>
+                    <a href="https://www.linkedin.com/in/manilgrover/" target="_blank">💼 LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
