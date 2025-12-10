@@ -270,6 +270,8 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     animation: fadeIn 0.3s;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 @keyframes fadeIn {
@@ -284,8 +286,11 @@ body {
     border-radius: 15px;
     max-width: 500px;
     width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
     position: relative;
     animation: slideIn 0.3s;
+    -webkit-overflow-scrolling: touch;
 }
 
 @keyframes slideIn {
@@ -557,11 +562,17 @@ body {
 
 /* Mobile Input (hidden but functional) */
 .mobile-input {
-    position: absolute;
+    position: fixed;
+    top: -100px;
+    left: -100px;
+    width: 1px;
+    height: 1px;
     opacity: 0;
     pointer-events: none;
-    z-index: -1;
-    left: -9999px;
+    z-index: -9999;
+    border: none;
+    outline: none;
+    background: transparent;
 }
 
 /* Responsive design */
