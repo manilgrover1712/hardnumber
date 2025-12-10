@@ -142,6 +142,34 @@ function setupEventListeners() {
         }
     });
     
+    // Mobile input handler - auto focus on mobile devices
+    const mobileInput = document.getElementById('mobileInput');
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    
+    if (isMobile && mobileInput) {
+        // Keep input focused to show keyboard
+        mobileInput.addEventListener('blur', () => {
+            if (!gameOver) {
+                setTimeout(() => mobileInput.focus(), 0);
+            }
+        });
+        
+        // Handle input from mobile keyboard
+        mobileInput.addEventListener('input', (e) => {
+            const value = e.target.value;
+            if (value && !gameOver) {
+                const lastChar = value[value.length - 1];
+                if (lastChar >= '0' && lastChar <= '9') {
+                    handleNumberInput(lastChar);
+                }
+                mobileInput.value = ''; // Clear for next input
+            }
+        });
+        
+        // Focus on game start
+        setTimeout(() => mobileInput.focus(), 500);
+    }
+    
     // Modal handlers
     const helpBtn = document.getElementById('helpBtn');
     const statsBtn = document.getElementById('statsBtn');

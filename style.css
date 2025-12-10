@@ -555,6 +555,15 @@ body {
     text-decoration: underline;
 }
 
+/* Mobile Input (hidden but functional) */
+.mobile-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    z-index: -1;
+    left: -9999px;
+}
+
 /* Responsive design */
 @media (max-width: 600px) {
     .container {
